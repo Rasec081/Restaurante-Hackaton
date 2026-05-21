@@ -1,4 +1,3 @@
-import { ingredientes } from './ingredientes.js';
 import { proveedores } from './proveedores.js';
 
 export const currency = new Intl.NumberFormat('es-CR', {
@@ -11,12 +10,18 @@ export const percent = new Intl.NumberFormat('es-CR', {
   maximumFractionDigits: 1,
 });
 
-export const ingredientsById = Object.fromEntries(ingredientes.map((item) => [item.id, item]));
 export const suppliersById = Object.fromEntries(proveedores.map((item) => [item.id, item]));
 
-export function calculateRecipeCost(recipe, priceKey = 'precio_actual') {
+export function createIngredientsById(sourceIngredients) {
+  return Object.fromEntries(sourceIngredients.map((item) => [item.id, item]));
+}
+
+export function calculateRecipeCost(recipe, sourceIngredients, priceKey = 'precio_actual') {
+  const ingredientsById = createIngredientsById(sourceIngredients);
+
   return recipe.ingredientes.reduce((total, item) => {
     const ingredient = ingredientsById[item.ingrediente_id];
+    if (!ingredient) return total;
     return total + item.cantidad * ingredient[priceKey];
   }, 0);
 }
@@ -26,13 +31,15 @@ export function calculateMargin(price, cost) {
   return ((price - cost) / price) * 100;
 }
 
-export function getEnrichedRecipes(sourceRecipes, getStatus = () => 'Normal') {
+export function getEnrichedRecipes(sourceRecipes, getStatus = () => 'Normal', sourceIngredients = []) {
+  const ingredientsById = createIngredientsById(sourceIngredients);
+
   return sourceRecipes.map((recipe) => {
-    const costo_calculado = calculateRecipeCost(recipe);
+    const costo_calculado = calculateRecipeCost(recipe, sourceIngredients);
     const margen_pct = calculateMargin(recipe.precio_venta, costo_calculado);
     const hasAlert = recipe.ingredientes.some((item) => {
       const ingredient = ingredientsById[item.ingrediente_id];
-      return getStatus(ingredient.variacion_pct) === 'Alerta';
+      return ingredient && getStatus(ingredient.variacion_pct) === 'Alerta';
     });
 
     return {
@@ -44,12 +51,12 @@ export function getEnrichedRecipes(sourceRecipes, getStatus = () => 'Normal') {
   });
 }
 
-export function getAffectedRecipes(sourceRecipes, ingredientId, targetMargin = 65) {
+export function getAffectedRecipes(sourceRecipes, sourceIngredients, ingredientId, targetMargin = 65) {
   return sourceRecipes
     .filter((recipe) => recipe.ingredientes.some((item) => item.ingrediente_id === ingredientId))
     .map((recipe) => {
-      const costo_anterior = calculateRecipeCost(recipe, 'precio_anterior');
-      const costo_nuevo = calculateRecipeCost(recipe, 'precio_actual');
+      const costo_anterior = calculateRecipeCost(recipe, sourceIngredients, 'precio_anterior');
+      const costo_nuevo = calculateRecipeCost(recipe, sourceIngredients, 'precio_actual');
       const margen_anterior = calculateMargin(recipe.precio_venta, costo_anterior);
       const margen_nuevo = calculateMargin(recipe.precio_venta, costo_nuevo);
       const precio_sugerido = costo_nuevo / (1 - targetMargin / 100);
@@ -67,8 +74,8 @@ export function getAffectedRecipes(sourceRecipes, ingredientId, targetMargin = 6
     });
 }
 
-export function getAuditCounts(getStatus) {
-  return ingredientes.reduce(
+export function getAuditCounts(sourceIngredients, getStatus) {
+  return sourceIngredients.reduce(
     (counts, ingredient) => {
       const status = getStatus(ingredient.variacion_pct);
       counts.total += 1;

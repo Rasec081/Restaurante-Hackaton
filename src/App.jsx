@@ -6,6 +6,7 @@ import Auditoria from './pages/Auditoria.jsx';
 import Recetas from './pages/Recetas.jsx';
 import Configuracion from './pages/Configuracion.jsx';
 import { recetas as initialRecipes } from './data/recetas.js';
+import { ingredientes as initialIngredients } from './data/ingredientes.js';
 
 const AuditConfigContext = createContext(null);
 
@@ -25,6 +26,7 @@ export default function App() {
   const [targetMargin, setTargetMargin] = useState(65);
   const [reviewedAlerts, setReviewedAlerts] = useState([]);
   const [recipes, setRecipes] = useState(initialRecipes);
+  const [ingredients, setIngredients] = useState(initialIngredients);
   const [isNavOpen, setIsNavOpen] = useState(false);
 
   const value = useMemo(
@@ -33,6 +35,14 @@ export default function App() {
       setAlertThreshold,
       targetMargin,
       setTargetMargin,
+      ingredients,
+      createIngredient: (ingredient) => setIngredients((current) => [ingredient, ...current]),
+      updateIngredient: (ingredient) =>
+        setIngredients((current) => current.map((item) => (item.id === ingredient.id ? ingredient : item))),
+      deleteIngredient: (id) => {
+        setIngredients((current) => current.filter((item) => item.id !== id));
+        setReviewedAlerts((current) => current.filter((item) => item !== id));
+      },
       recipes,
       createRecipe: (recipe) => setRecipes((current) => [recipe, ...current]),
       updateRecipe: (recipe) =>
@@ -43,7 +53,7 @@ export default function App() {
         setReviewedAlerts((current) => (current.includes(id) ? current : [...current, id])),
       getStatus: (variation) => classifyVariation(variation, alertThreshold),
     }),
-    [alertThreshold, targetMargin, reviewedAlerts, recipes],
+    [alertThreshold, targetMargin, reviewedAlerts, recipes, ingredients],
   );
 
   return (

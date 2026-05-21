@@ -3,8 +3,8 @@ import { Link, NavLink } from 'react-router-dom';
 
 const links = [
   { to: '/', label: 'Inicio', icon: BarChart3 },
-  { to: '/auditoria', label: 'Auditoría', icon: ClipboardList },
-  { to: '/recetas', label: 'Platillos', icon: ChefHat },
+  { to: '/auditoria?estado=Alerta', label: 'Auditoría', icon: ClipboardList },
+  { to: '/recetas?filtro=alerta', label: 'Platillos', icon: ChefHat },
   { to: '/configuracion', label: 'Configuración', icon: Settings },
 ];
 

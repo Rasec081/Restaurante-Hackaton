@@ -1,11 +1,12 @@
 import { ChevronDown, ChevronUp, Pencil, Trash2, TriangleAlert } from 'lucide-react';
 import { useState } from 'react';
-import { currency, ingredientsById, percent } from '../data/calculations.js';
+import { createIngredientsById, currency, percent } from '../data/calculations.js';
 
-export default function RecipeCard({ recipe, targetMargin, getStatus, onEdit, onDelete }) {
+export default function RecipeCard({ recipe, targetMargin, getStatus, ingredients, onEdit, onDelete }) {
   const [open, setOpen] = useState(false);
   const belowTarget = recipe.margen_pct < targetMargin;
   const profit = recipe.precio_venta - recipe.costo_calculado;
+  const ingredientsById = createIngredientsById(ingredients);
 
   return (
     <article className="panel rounded-lg p-5">
@@ -77,7 +78,7 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, onEdit, on
             <tbody className="divide-y divide-stone-100 bg-white">
               {recipe.ingredientes.map((item) => {
                 const ingredient = ingredientsById[item.ingrediente_id];
-                const isAlert = getStatus(ingredient.variacion_pct) === 'Alerta';
+                const isAlert = ingredient && getStatus(ingredient.variacion_pct) === 'Alerta';
                 return (
                   <tr
                     key={item.ingrediente_id}
@@ -85,7 +86,7 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, onEdit, on
                   >
                     <td className="px-3 py-3 font-semibold text-cacao">
                       <div className="flex flex-wrap items-center gap-2">
-                        <span>{ingredient.nombre}</span>
+                        <span>{ingredient?.nombre ?? 'Insumo eliminado'}</span>
                         {isAlert && (
                           <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700">
                             <TriangleAlert size={13} />
@@ -98,10 +99,10 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, onEdit, on
                       {item.cantidad} {item.unidad}
                     </td>
                     <td className={`px-3 py-3 ${isAlert ? 'font-bold text-red-700' : 'text-stone-600'}`}>
-                      {currency.format(ingredient.precio_actual)}
+                      {ingredient ? currency.format(ingredient.precio_actual) : 'N/D'}
                     </td>
                     <td className={`px-3 py-3 font-semibold ${isAlert ? 'text-red-700' : ''}`}>
-                      {currency.format(item.cantidad * ingredient.precio_actual)}
+                      {ingredient ? currency.format(item.cantidad * ingredient.precio_actual) : 'N/D'}
                     </td>
                   </tr>
                 );

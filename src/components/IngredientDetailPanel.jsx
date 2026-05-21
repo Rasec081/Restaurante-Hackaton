@@ -10,11 +10,12 @@ export default function IngredientDetailPanel({
   reviewed,
   targetMargin,
   recipes,
+  ingredients,
 }) {
   if (!ingredient) return null;
 
   const status = getStatus(ingredient.variacion_pct);
-  const affectedRecipes = getAffectedRecipes(recipes, ingredient.id, targetMargin);
+  const affectedRecipes = getAffectedRecipes(recipes, ingredients, ingredient.id, targetMargin);
 
   return (
     <div className="fixed inset-0 z-40">

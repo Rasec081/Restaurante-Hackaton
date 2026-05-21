@@ -1,4 +1,4 @@
-import { CheckCircle2 } from 'lucide-react';
+import { CheckCircle2, Pencil, Trash2 } from 'lucide-react';
 import { currency, percent, suppliersById } from '../data/calculations.js';
 import PriceAlertBadge from './PriceAlertBadge.jsx';
 
@@ -6,6 +6,8 @@ export default function IngredientAuditTable({
   ingredients,
   getStatus,
   onSelect,
+  onEdit,
+  onDelete,
   reviewedAlerts,
 }) {
   return (
@@ -21,6 +23,7 @@ export default function IngredientAuditTable({
               <th className="px-4 py-3">Variación</th>
               <th className="px-4 py-3">Estado</th>
               <th className="px-4 py-3">Proveedor</th>
+              <th className="px-4 py-3 text-right">Acciones</th>
             </tr>
           </thead>
           <tbody className="divide-y divide-stone-100 bg-white">
@@ -47,6 +50,32 @@ export default function IngredientAuditTable({
                     <PriceAlertBadge status={status} />
                   </td>
                   <td className="px-4 py-4 text-stone-600">{suppliersById[ingredient.proveedor_id].nombre}</td>
+                  <td className="px-4 py-4">
+                    <div className="flex justify-end gap-2">
+                      <button
+                        className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-stone-100 text-stone-600 transition hover:bg-stone-200 hover:text-cacao"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onEdit(ingredient);
+                        }}
+                        aria-label={`Editar ${ingredient.nombre}`}
+                        title="Editar"
+                      >
+                        <Pencil size={16} />
+                      </button>
+                      <button
+                        className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"
+                        onClick={(event) => {
+                          event.stopPropagation();
+                          onDelete(ingredient.id);
+                        }}
+                        aria-label={`Eliminar ${ingredient.nombre}`}
+                        title="Eliminar"
+                      >
+                        <Trash2 size={16} />
+                      </button>
+                    </div>
+                  </td>
                 </tr>
               );
             })}

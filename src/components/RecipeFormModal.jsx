@@ -1,35 +1,41 @@
 import { Plus, Save, Trash2, X } from 'lucide-react';
 import { useMemo, useState } from 'react';
-import { ingredientes } from '../data/ingredientes.js';
 
-const emptyIngredient = {
-  ingrediente_id: 'arroz',
-  cantidad: 0.1,
-  unidad: 'kg',
-};
+const unitOptions = ['kg', 'g', 'l', 'ml', 'unidad', 'porción', 'cda', 'cdta', 'taza'];
 
 const emptyRecipe = {
   nombre: '',
   categoria: 'Plato fuerte',
   precio_venta: 3500,
-  ingredientes: [emptyIngredient],
 };
 
-const unitOptions = ['kg', 'g', 'l', 'ml', 'unidad', 'porción', 'cda', 'cdta', 'taza'];
+function getEmptyIngredient(ingredients) {
+  const firstIngredient = ingredients[0];
 
-export default function RecipeFormModal({ recipe, onClose, onSave }) {
+  return {
+    ingrediente_id: firstIngredient?.id ?? '',
+    cantidad: 0.1,
+    unidad: firstIngredient?.unidad ?? 'kg',
+  };
+}
+
+export default function RecipeFormModal({ recipe, onClose, onSave, ingredients }) {
   const [form, setForm] = useState(() => ({
     ...emptyRecipe,
     ...recipe,
-    ingredientes: recipe?.ingredientes?.length ? recipe.ingredientes : [emptyIngredient],
+    ingredientes: recipe?.ingredientes?.length ? recipe.ingredientes : [getEmptyIngredient(ingredients)],
   }));
 
   const title = recipe ? 'Editar platillo' : 'Nuevo platillo';
-  const canSave = form.nombre.trim() && Number(form.precio_venta) > 0 && form.ingredientes.length > 0;
+  const canSave =
+    form.nombre.trim() &&
+    Number(form.precio_venta) > 0 &&
+    form.ingredientes.length > 0 &&
+    form.ingredientes.every((item) => item.ingrediente_id && Number(item.cantidad) > 0);
 
   const ingredientOptions = useMemo(
-    () => ingredientes.map((ingredient) => ({ id: ingredient.id, label: ingredient.nombre, unit: ingredient.unidad })),
-    [],
+    () => ingredients.map((ingredient) => ({ id: ingredient.id, label: ingredient.nombre, unit: ingredient.unidad })),
+    [ingredients],
   );
 
   function updateField(field, value) {
@@ -43,7 +49,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave }) {
         if (itemIndex !== index) return item;
 
         if (field === 'ingrediente_id') {
-          const selected = ingredientes.find((ingredient) => ingredient.id === value);
+          const selected = ingredients.find((ingredient) => ingredient.id === value);
           return { ...item, ingrediente_id: value, unidad: selected?.unidad ?? item.unidad };
         }
 
@@ -55,7 +61,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave }) {
   function addIngredient() {
     setForm((current) => ({
       ...current,
-      ingredientes: [...current.ingredientes, { ...emptyIngredient }],
+      ingredientes: [...current.ingredientes, getEmptyIngredient(ingredients)],
     }));
   }
 
@@ -138,8 +144,9 @@ export default function RecipeFormModal({ recipe, onClose, onSave }) {
                 <h3 className="font-bold text-cacao">Ingredientes</h3>
                 <button
                   type="button"
-                  className="focus-ring inline-flex items-center gap-2 rounded-lg bg-stone-100 px-3 py-2 text-sm font-bold text-stone-700 hover:bg-stone-200"
+                  className="focus-ring inline-flex items-center gap-2 rounded-lg bg-stone-100 px-3 py-2 text-sm font-bold text-stone-700 hover:bg-stone-200 disabled:cursor-not-allowed disabled:opacity-50"
                   onClick={addIngredient}
+                  disabled={!ingredients.length}
                 >
                   <Plus size={16} />
                   Agregar
@@ -148,7 +155,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave }) {
 
               <div className="mt-3 space-y-3">
                 {form.ingredientes.map((item, index) => (
-                <div key={`${item.ingrediente_id}-${index}`} className="grid gap-3 rounded-lg border border-stone-200 p-3 sm:grid-cols-[1fr_130px_110px_40px]">
+                  <div key={`${item.ingrediente_id}-${index}`} className="grid gap-3 rounded-lg border border-stone-200 p-3 sm:grid-cols-[1fr_130px_110px_40px]">
                     <select
                       className="focus-ring rounded-lg border border-stone-200 px-3 py-2"
                       value={item.ingrediente_id}

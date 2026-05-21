@@ -1,30 +1,32 @@
 import { ArrowRight, CalendarDays } from 'lucide-react';
 import { Link } from 'react-router-dom';
 import { useAuditConfig } from '../App.jsx';
+import logoImage from '../assets/prueba3.png';
 import { auditoria } from '../data/auditoria.js';
 import { getAuditCounts, getEnrichedRecipes } from '../data/calculations.js';
 
 export default function Dashboard() {
-  const { getStatus, recipes } = useAuditConfig();
-  const counts = getAuditCounts(getStatus);
-  const dishesToReview = getEnrichedRecipes(recipes, getStatus).filter((recipe) => recipe.hasAlert).length;
+  const { getStatus, recipes, ingredients } = useAuditConfig();
+  const counts = getAuditCounts(ingredients, getStatus);
+  const dishesToReview = getEnrichedRecipes(recipes, getStatus, ingredients).filter((recipe) => recipe.hasAlert).length;
 
   return (
     <div className="space-y-4">
       <section className="mx-auto max-w-5xl px-5 py-8 text-center sm:px-8 lg:py-9">
-        <h1 className="text-3xl font-bold text-dorado sm:text-4xl">SOSCIO</h1>
-        <p className="mx-auto mt-3 inline-flex rounded-full bg-slate-100 px-3 py-1 text-xs font-bold text-slate-800">
-          Food Cost Intelligence
-        </p>
+        <img
+          className="mx-auto h-auto w-[28rem] max-w-full sm:w-[34rem] lg:w-[42rem]"
+          src={logoImage}
+          alt="Soscio"
+        />
 
         <div className="mx-auto mt-7 max-w-2xl space-y-2.5">
           <AlertButton
-            to="/recetas"
+            to="/recetas?filtro=alerta"
             count={dishesToReview}
             title={`Tienes ${dishesToReview} platillos que deberías revisar`}
           />
           <AlertButton
-            to="/auditoria"
+            to="/auditoria?estado=Alerta"
             count={counts.alertas}
             title={`Tienes ${counts.alertas} alertas de insumos`}
           />
