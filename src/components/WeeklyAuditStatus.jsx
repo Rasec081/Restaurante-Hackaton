@@ -9,19 +9,19 @@ export default function WeeklyAuditStatus({ counts }) {
     <section className="panel rounded-lg p-5">
       <div className="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
         <div>
-          <p className="text-sm font-semibold text-dorado">Estado semanal</p>
+          <p className="text-sm font-semibold text-[#20C66B]">Estado semanal</p>
           <h2 className="mt-1 text-xl font-bold text-cacao">Auditoría activa y lista para revisión</h2>
         </div>
-        <div className="inline-flex w-fit items-center gap-2 rounded-full bg-emerald-50 px-3 py-1.5 text-sm font-bold text-emerald-700">
+        <div className="inline-flex w-fit items-center gap-2 rounded-full bg-[#20C66B]/10 px-3 py-1.5 text-sm font-bold text-[#20C66B]">
           <CheckCircle2 size={17} />
           Datos mock actualizados
         </div>
       </div>
       <div className="mt-5 h-3 overflow-hidden rounded-full bg-stone-100">
         <div className="flex h-full">
-          <span className="bg-red-500" style={{ width: `${alertRatio}%` }} />
-          <span className="bg-amber-500" style={{ width: `${vigilanceRatio}%` }} />
-          <span className="bg-emerald-500" style={{ width: `${stableRatio}%` }} />
+          <span className="bg-[#FF5151]" style={{ width: `${alertRatio}%` }} />
+          <span className="bg-[#FDBA2D]" style={{ width: `${vigilanceRatio}%` }} />
+          <span className="bg-[#20C66B]" style={{ width: `${stableRatio}%` }} />
         </div>
       </div>
       <div className="mt-4 grid gap-2 text-sm text-stone-600 sm:grid-cols-3">

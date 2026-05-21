@@ -39,7 +39,7 @@ export default function IngredientAuditTable({
                   <td className="px-4 py-4 font-semibold text-cacao">
                     <span className="inline-flex items-center gap-2">
                       {ingredient.nombre}
-                      {reviewed && <CheckCircle2 className="text-emerald-600" size={16} />}
+                      {reviewed && <CheckCircle2 className="text-[#20C66B]" size={16} />}
                     </span>
                   </td>
                   <td className="px-4 py-4 text-stone-600">{ingredient.unidad}</td>
@@ -64,7 +64,7 @@ export default function IngredientAuditTable({
                         <Pencil size={16} />
                       </button>
                       <button
-                        className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"
+                        className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-[#FF5151]/10 text-[#FF5151] transition hover:bg-[#FF5151]/10"
                         onClick={(event) => {
                           event.stopPropagation();
                           onDelete(ingredient.id);

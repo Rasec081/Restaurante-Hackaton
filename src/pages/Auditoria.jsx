@@ -80,7 +80,7 @@ export default function Auditoria() {
         <div className="relative">
           <BackToHome />
           <div>
-            <p className="text-sm font-bold text-dorado">Auditoría semanal</p>
+            <p className="text-sm font-bold text-[#20C66B]">Auditoría semanal</p>
             <h1 className="mt-1 text-3xl font-bold text-cacao">Variación de insumos</h1>
           </div>
         </div>
@@ -91,7 +91,7 @@ export default function Auditoria() {
                 key={item.id}
                 className={`focus-ring rounded-lg px-3 py-2 text-sm font-bold transition ${
                   filter === item.id
-                    ? 'bg-slate-800 text-white'
+                    ? 'bg-[#10213D] text-white'
                     : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-50'
                 }`}
                 onClick={() => setFilter(item.id)}
@@ -101,7 +101,7 @@ export default function Auditoria() {
             ))}
           </div>
           <button
-            className="focus-ring inline-flex w-fit items-center gap-2 rounded-lg bg-slate-800 px-4 py-3 font-bold text-white transition hover:bg-[#0f172a]"
+            className="focus-ring inline-flex w-fit items-center gap-2 rounded-lg bg-[#10213D] px-4 py-3 font-bold text-white transition hover:bg-[#07152b]"
             onClick={openCreateForm}
           >
             <Plus size={18} />
@@ -148,7 +148,7 @@ function BackToHome() {
   return (
     <Link
       to="/"
-      className="focus-ring absolute -left-14 top-1 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-slate-800 shadow-sm ring-1 ring-stone-200 transition hover:bg-slate-800 hover:text-white"
+      className="focus-ring absolute -left-14 top-1 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-[#10213D] shadow-sm ring-1 ring-stone-200 transition hover:bg-[#10213D] hover:text-white"
       aria-label="Volver al inicio"
       title="Volver al inicio"
     >

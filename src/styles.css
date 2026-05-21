@@ -33,6 +33,6 @@ input {
   .focus-ring:focus-visible {
     box-shadow:
       0 0 0 2px #ffffff,
-      0 0 0 4px #1E293B;
+      0 0 0 4px #10213D;
   }
 }

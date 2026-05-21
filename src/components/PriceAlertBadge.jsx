@@ -1,8 +1,8 @@
 const styles = {
-  Alerta: 'bg-red-100 text-red-700 ring-red-200',
-  Vigilar: 'bg-amber-100 text-amber-800 ring-amber-200',
-  Normal: 'bg-emerald-100 text-emerald-700 ring-emerald-200',
-  Oportunidad: 'bg-blue-100 text-blue-700 ring-blue-200',
+  Alerta: 'bg-[#FF5151]/10 text-[#FF5151] ring-[#FF5151]/20',
+  Vigilar: 'bg-[#FDBA2D]/15 text-[#FDBA2D] ring-[#FDBA2D]/25',
+  Normal: 'bg-[#20C66B]/10 text-[#20C66B] ring-[#20C66B]/20',
+  Oportunidad: 'bg-[#10213D]/10 text-[#10213D] ring-navy/20',
 };
 
 export default function PriceAlertBadge({ status }) {

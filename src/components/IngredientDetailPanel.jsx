@@ -65,8 +65,8 @@ export default function IngredientDetailPanel({
                   <span
                     className={`w-fit rounded-full px-2.5 py-1 text-xs font-bold ${
                       recipe.margen_nuevo < 30
-                        ? 'bg-red-100 text-red-700'
-                        : 'bg-emerald-100 text-emerald-700'
+                        ? 'bg-[#FF5151]/10 text-[#FF5151]'
+                        : 'bg-[#20C66B]/10 text-[#20C66B]'
                     }`}
                   >
                     {recipe.sugerencia}
@@ -87,7 +87,7 @@ export default function IngredientDetailPanel({
 
         <div className="border-t border-stone-200 p-5">
           <button
-            className="focus-ring w-full rounded-lg bg-slate-800 px-4 py-3 font-bold text-white transition hover:bg-[#0f172a] disabled:cursor-not-allowed disabled:bg-stone-300"
+            className="focus-ring w-full rounded-lg bg-[#10213D] px-4 py-3 font-bold text-white transition hover:bg-[#07152b] disabled:cursor-not-allowed disabled:bg-stone-300"
             onClick={() => markReviewed(ingredient.id)}
             disabled={reviewed}
           >

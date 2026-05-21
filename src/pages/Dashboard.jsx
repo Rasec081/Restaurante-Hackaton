@@ -42,7 +42,7 @@ export default function Dashboard() {
 
 function AuditDates() {
   return (
-    <div className="w-full max-w-2xl rounded-lg bg-slate-800 px-4 py-3 text-white shadow-sm">
+    <div className="w-full max-w-2xl rounded-lg bg-[#10213D] px-4 py-3 text-white shadow-sm">
       <div className="flex items-center justify-center gap-2 text-[11px] font-bold uppercase tracking-wide text-slate-200">
         <CalendarDays size={13} />
         Fechas de auditoría
@@ -69,7 +69,7 @@ function AlertButton({ to, count, title }) {
       to={to}
       className={`focus-ring flex items-center justify-between gap-4 rounded-lg border px-4 py-3 text-left transition hover:-translate-y-0.5 hover:shadow-sm ${
         active
-          ? 'border-red-100 bg-red-50/70 text-cacao hover:border-slate-800/40'
+          ? 'border-[#FF5151]/15 bg-[#FF5151]/5 text-cacao hover:border-[#10213D]/40'
           : 'border-stone-200 bg-stone-50 text-stone-700'
       }`}
     >
@@ -77,7 +77,7 @@ function AlertButton({ to, count, title }) {
         <p className="w-9 text-3xl font-bold tabular-nums">{count}</p>
         <p className="text-sm font-bold sm:text-base">{title}</p>
       </div>
-      <ArrowRight className={active ? 'text-slate-800' : 'text-stone-400'} size={18} />
+      <ArrowRight className={active ? 'text-[#10213D]' : 'text-stone-400'} size={18} />
     </Link>
   );
 }

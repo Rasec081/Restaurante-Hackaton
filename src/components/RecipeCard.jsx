@@ -14,7 +14,7 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, ingredient
         <button className="w-full text-left" onClick={() => setOpen((value) => !value)}>
           <div className="flex items-start justify-between gap-3">
             <div>
-              <p className="text-xs font-bold uppercase tracking-wide text-dorado">{recipe.categoria}</p>
+              <p className="text-xs font-bold uppercase tracking-wide text-[#20C66B]">{recipe.categoria}</p>
               <h2 className="mt-1 text-xl font-bold text-cacao">{recipe.nombre}</h2>
             </div>
             <div className="grid h-9 w-9 place-items-center rounded-lg bg-stone-100 text-stone-600">
@@ -32,7 +32,7 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, ingredient
             <Pencil size={17} />
           </button>
           <button
-            className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100"
+            className="focus-ring grid h-9 w-9 place-items-center rounded-lg bg-[#FF5151]/10 text-[#FF5151] transition hover:bg-[#FF5151]/10"
             onClick={() => onDelete(recipe.id)}
             aria-label={`Eliminar ${recipe.nombre}`}
             title="Eliminar"
@@ -51,13 +51,13 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, ingredient
         </div>
         <div className="mt-4 flex flex-wrap gap-2">
           {recipe.hasAlert && (
-            <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2.5 py-1 text-xs font-bold text-red-700">
+            <span className="inline-flex items-center gap-1 rounded-full bg-[#FF5151]/10 px-2.5 py-1 text-xs font-bold text-[#FF5151]">
               <TriangleAlert size={14} />
               Insumo en alerta
             </span>
           )}
           {belowTarget && (
-            <span className="rounded-full bg-amber-100 px-2.5 py-1 text-xs font-bold text-amber-800">
+            <span className="rounded-full bg-[#FDBA2D]/15 px-2.5 py-1 text-xs font-bold text-[#FDBA2D]">
               Bajo margen objetivo
             </span>
           )}
@@ -82,26 +82,26 @@ export default function RecipeCard({ recipe, targetMargin, getStatus, ingredient
                 return (
                   <tr
                     key={item.ingrediente_id}
-                    className={isAlert ? 'bg-red-50/80 ring-1 ring-inset ring-red-100' : undefined}
+                    className={isAlert ? 'bg-[#FF5151]/5 ring-1 ring-inset ring-[#FF5151]/15' : undefined}
                   >
                     <td className="px-3 py-3 font-semibold text-cacao">
                       <div className="flex flex-wrap items-center gap-2">
                         <span>{ingredient?.nombre ?? 'Insumo eliminado'}</span>
                         {isAlert && (
-                          <span className="inline-flex items-center gap-1 rounded-full bg-red-100 px-2 py-0.5 text-xs font-bold text-red-700">
+                          <span className="inline-flex items-center gap-1 rounded-full bg-[#FF5151]/10 px-2 py-0.5 text-xs font-bold text-[#FF5151]">
                             <TriangleAlert size={13} />
                             +{percent.format(ingredient.variacion_pct)}%
                           </span>
                         )}
                       </div>
                     </td>
-                    <td className={`px-3 py-3 ${isAlert ? 'font-semibold text-red-700' : 'text-stone-600'}`}>
+                    <td className={`px-3 py-3 ${isAlert ? 'font-semibold text-[#FF5151]' : 'text-stone-600'}`}>
                       {item.cantidad} {item.unidad}
                     </td>
-                    <td className={`px-3 py-3 ${isAlert ? 'font-bold text-red-700' : 'text-stone-600'}`}>
+                    <td className={`px-3 py-3 ${isAlert ? 'font-bold text-[#FF5151]' : 'text-stone-600'}`}>
                       {ingredient ? currency.format(ingredient.precio_actual) : 'N/D'}
                     </td>
-                    <td className={`px-3 py-3 font-semibold ${isAlert ? 'text-red-700' : ''}`}>
+                    <td className={`px-3 py-3 font-semibold ${isAlert ? 'text-[#FF5151]' : ''}`}>
                       {ingredient ? currency.format(item.cantidad * ingredient.precio_actual) : 'N/D'}
                     </td>
                   </tr>

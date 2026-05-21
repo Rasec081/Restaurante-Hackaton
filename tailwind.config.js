@@ -4,14 +4,18 @@ export default {
   theme: {
     extend: {
       colors: {
-        crema: '#F9F8F6',
-        cacao: '#34231F',
-        graphite: '#1E293B',
-        terracota: '#1E293B',
-        dorado: '#C59B45',
+        crema: '#F7F8FA',
+        cacao: '#111827',
+        navy: '#10213D',
+        graphite: '#10213D',
+        terracota: '#10213D',
+        success: '#20C66B',
+        warning: '#FDBA2D',
+        danger: '#FF5151',
+        dorado: '#20C66B',
       },
       boxShadow: {
-        soft: '0 18px 45px rgba(30, 41, 59, 0.08)',
+        soft: '0 18px 45px rgba(16, 33, 61, 0.08)',
       },
     },
   },

@@ -10,9 +10,9 @@ const iconMap = {
 
 const toneMap = {
   total: 'bg-stone-100 text-stone-700',
-  alertas: 'bg-red-100 text-red-700',
-  vigilancia: 'bg-amber-100 text-amber-700',
-  promedio: 'bg-blue-100 text-blue-700',
+  alertas: 'bg-[#FF5151]/10 text-[#FF5151]',
+  vigilancia: 'bg-[#FDBA2D]/15 text-[#FDBA2D]',
+  promedio: 'bg-[#10213D]/10 text-[#10213D]',
 };
 
 export default function AuditSummaryCards({ counts, averageVariation }) {

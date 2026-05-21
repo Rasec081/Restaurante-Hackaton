@@ -97,7 +97,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave, ingredients }
         <form onSubmit={handleSubmit}>
           <div className="flex items-start justify-between gap-4 border-b border-stone-200 px-5 py-4">
             <div>
-              <p className="text-sm font-bold text-dorado">Platillos</p>
+              <p className="text-sm font-bold text-[#20C66B]">Platillos</p>
               <h2 className="mt-1 text-2xl font-bold text-cacao">{title}</h2>
             </div>
             <button
@@ -188,7 +188,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave, ingredients }
                     </select>
                     <button
                       type="button"
-                      className="focus-ring grid h-10 w-10 place-items-center rounded-lg bg-red-50 text-red-600 transition hover:bg-red-100 disabled:cursor-not-allowed disabled:opacity-40"
+                      className="focus-ring grid h-10 w-10 place-items-center rounded-lg bg-[#FF5151]/10 text-[#FF5151] transition hover:bg-[#FF5151]/10 disabled:cursor-not-allowed disabled:opacity-40"
                       onClick={() => removeIngredient(index)}
                       disabled={form.ingredientes.length === 1}
                       aria-label="Eliminar ingrediente"
@@ -211,7 +211,7 @@ export default function RecipeFormModal({ recipe, onClose, onSave, ingredients }
             </button>
             <button
               type="submit"
-              className="focus-ring inline-flex items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 py-2 font-bold text-white transition hover:bg-[#0f172a] disabled:cursor-not-allowed disabled:bg-stone-300"
+              className="focus-ring inline-flex items-center justify-center gap-2 rounded-lg bg-[#10213D] px-4 py-2 font-bold text-white transition hover:bg-[#07152b] disabled:cursor-not-allowed disabled:bg-stone-300"
               disabled={!canSave}
             >
               <Save size={17} />

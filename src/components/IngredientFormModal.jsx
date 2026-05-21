@@ -69,7 +69,7 @@ export default function IngredientFormModal({ ingredient, onClose, onSave }) {
         <form onSubmit={handleSubmit}>
           <div className="flex items-start justify-between gap-4 border-b border-stone-200 px-5 py-4">
             <div>
-              <p className="text-sm font-bold text-dorado">Auditoría semanal</p>
+              <p className="text-sm font-bold text-[#20C66B]">Auditoría semanal</p>
               <h2 className="mt-1 text-2xl font-bold text-cacao">{title}</h2>
             </div>
             <button
@@ -161,7 +161,7 @@ export default function IngredientFormModal({ ingredient, onClose, onSave }) {
             </button>
             <button
               type="submit"
-              className="focus-ring inline-flex items-center justify-center gap-2 rounded-lg bg-slate-800 px-4 py-2 font-bold text-white transition hover:bg-[#0f172a] disabled:cursor-not-allowed disabled:bg-stone-300"
+              className="focus-ring inline-flex items-center justify-center gap-2 rounded-lg bg-[#10213D] px-4 py-2 font-bold text-white transition hover:bg-[#07152b] disabled:cursor-not-allowed disabled:bg-stone-300"
               disabled={!canSave}
             >
               <Save size={17} />
