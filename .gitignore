@@ -253,7 +253,8 @@ staticfiles/
 .pytype/
 
 # =========================
-# React / Vite Frontend
+# FoodCost Audit MVP
+# React 18 / Vite / Tailwind CSS / Lucide React
 # =========================
 
 # Dependencies
@@ -261,7 +262,6 @@ node_modules/
 
 # Production builds
 dist/
-build/
 
 # Vite cache
 .vite/
@@ -301,6 +301,10 @@ lerna-debug.log*
 
 # Storybook
 storybook-static/
+
+# Optional frontend tooling
+playwright-report/
+test-results/
 
 # =========================
 # Editor / OS
