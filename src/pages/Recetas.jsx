@@ -1,5 +1,6 @@
-import { Plus } from 'lucide-react';
+import { ArrowLeft, Plus } from 'lucide-react';
 import { useState } from 'react';
+import { Link } from 'react-router-dom';
 import RecipeCard from '../components/RecipeCard.jsx';
 import RecipeFormModal from '../components/RecipeFormModal.jsx';
 import { useAuditConfig } from '../App.jsx';
@@ -40,13 +41,12 @@ export default function Recetas() {
   return (
     <div className="space-y-5">
       <header className="flex flex-col gap-4 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-bold text-dorado">Recetas costeadas</p>
-          <h1 className="mt-1 text-3xl font-bold text-cacao">Márgenes por platillo</h1>
-          <p className="mt-2 max-w-2xl text-sm leading-6 text-stone-600">
-            Crea y administra platillos del menú. Cada tarjeta calcula el costo actual con precios
-            mock y señala ingredientes en alerta.
-          </p>
+        <div className="relative">
+          <BackToHome />
+          <div>
+            <p className="text-sm font-bold text-dorado">Recetas costeadas</p>
+            <h1 className="mt-1 text-3xl font-bold text-cacao">Márgenes por platillo</h1>
+          </div>
         </div>
         <button
           className="focus-ring inline-flex w-fit items-center gap-2 rounded-lg bg-slate-800 px-4 py-3 font-bold text-white transition hover:bg-[#0f172a]"
@@ -90,5 +90,18 @@ export default function Recetas() {
         />
       )}
     </div>
+  );
+}
+
+function BackToHome() {
+  return (
+    <Link
+      to="/"
+      className="focus-ring absolute -left-14 top-1 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-slate-800 shadow-sm ring-1 ring-stone-200 transition hover:bg-slate-800 hover:text-white"
+      aria-label="Volver al inicio"
+      title="Volver al inicio"
+    >
+      <ArrowLeft size={19} />
+    </Link>
   );
 }

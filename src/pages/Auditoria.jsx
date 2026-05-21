@@ -1,4 +1,6 @@
+import { ArrowLeft } from 'lucide-react';
 import { useMemo, useState } from 'react';
+import { Link } from 'react-router-dom';
 import IngredientAuditTable from '../components/IngredientAuditTable.jsx';
 import IngredientDetailPanel from '../components/IngredientDetailPanel.jsx';
 import { useAuditConfig } from '../App.jsx';
@@ -28,9 +30,12 @@ export default function Auditoria() {
   return (
     <div className="space-y-5">
       <header className="flex flex-col gap-3 sm:flex-row sm:items-end sm:justify-between">
-        <div>
-          <p className="text-sm font-bold text-dorado">Auditoría semanal</p>
-          <h1 className="mt-1 text-3xl font-bold text-cacao">Variación de insumos</h1>
+        <div className="relative">
+          <BackToHome />
+          <div>
+            <p className="text-sm font-bold text-dorado">Auditoría semanal</p>
+            <h1 className="mt-1 text-3xl font-bold text-cacao">Variación de insumos</h1>
+          </div>
         </div>
         <div className="flex flex-wrap gap-2">
           {filters.map((item) => (
@@ -66,5 +71,18 @@ export default function Auditoria() {
         recipes={recipes}
       />
     </div>
+  );
+}
+
+function BackToHome() {
+  return (
+    <Link
+      to="/"
+      className="focus-ring absolute -left-14 top-1 grid h-10 w-10 shrink-0 place-items-center rounded-lg bg-white text-slate-800 shadow-sm ring-1 ring-stone-200 transition hover:bg-slate-800 hover:text-white"
+      aria-label="Volver al inicio"
+      title="Volver al inicio"
+    >
+      <ArrowLeft size={19} />
+    </Link>
   );
 }

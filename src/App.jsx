@@ -25,6 +25,7 @@ export default function App() {
   const [targetMargin, setTargetMargin] = useState(65);
   const [reviewedAlerts, setReviewedAlerts] = useState([]);
   const [recipes, setRecipes] = useState(initialRecipes);
+  const [isNavOpen, setIsNavOpen] = useState(false);
 
   const value = useMemo(
     () => ({
@@ -48,8 +49,14 @@ export default function App() {
   return (
     <AuditConfigContext.Provider value={value}>
       <div className="min-h-screen bg-crema text-cacao">
-        <Navbar />
-        <main className="mx-auto max-w-7xl px-4 pb-10 pt-4 sm:px-6 lg:pl-72 lg:pr-8 lg:pt-8">
+        <Navbar
+          isOpen={isNavOpen}
+          onOpen={() => setIsNavOpen(true)}
+          onClose={() => setIsNavOpen(false)}
+        />
+        <main
+          className="mx-auto max-w-7xl px-4 pb-10 pt-4 sm:px-6 lg:pl-24 lg:pr-8 lg:pt-8"
+        >
           <Routes>
             <Route path="/" element={<Dashboard />} />
             <Route path="/auditoria" element={<Auditoria />} />
