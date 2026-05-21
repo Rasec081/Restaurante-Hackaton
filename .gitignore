@@ -216,3 +216,105 @@ __marimo__/
 
 # Streamlit
 .streamlit/secrets.toml
+
+# =========================
+# FastAPI / Python Backend
+# =========================
+
+# Uvicorn / FastAPI logs
+uvicorn.log
+gunicorn.log
+*.log
+
+# Local databases
+*.sqlite
+*.sqlite3
+*.db
+
+# Alembic migrations cache
+alembic/versions/__pycache__/
+
+# Uploads / generated files
+uploads/
+media/
+staticfiles/
+
+# Local API files
+.env.local
+.env.development
+.env.production
+.env.test
+
+# Python cache extra
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
+.pyre/
+.pytype/
+
+# =========================
+# React / Vite Frontend
+# =========================
+
+# Dependencies
+node_modules/
+
+# Production builds
+dist/
+build/
+
+# Vite cache
+.vite/
+vite.config.*.timestamp-*
+vite.config.*.mjs.timestamp-*
+
+# React / frontend cache
+.cache/
+.parcel-cache/
+.next/
+out/
+
+# Test coverage
+coverage/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+# Package manager files
+.pnpm-store/
+
+# Environment variables
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
+
+# TypeScript
+*.tsbuildinfo
+
+# ESLint cache
+.eslintcache
+
+# Storybook
+storybook-static/
+
+# =========================
+# Editor / OS
+# =========================
+
+# VS Code settings opcional
+.vscode/*
+!.vscode/extensions.json
+!.vscode/settings.json
+
+# MacOS
+.DS_Store
+
+# Windows
+Thumbs.db
+ehthumbs.db
+Desktop.ini
