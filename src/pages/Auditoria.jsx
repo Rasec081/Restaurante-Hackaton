@@ -12,7 +12,7 @@ const filters = [
 ];
 
 export default function Auditoria() {
-  const { getStatus, reviewedAlerts, markReviewed, targetMargin } = useAuditConfig();
+  const { getStatus, reviewedAlerts, markReviewed, targetMargin, recipes } = useAuditConfig();
   const [filter, setFilter] = useState('Todos');
   const [selected, setSelected] = useState(null);
 
@@ -38,7 +38,7 @@ export default function Auditoria() {
               key={item.id}
               className={`focus-ring rounded-lg px-3 py-2 text-sm font-bold transition ${
                 filter === item.id
-                  ? 'bg-terracota text-white'
+                  ? 'bg-slate-800 text-white'
                   : 'bg-white text-stone-600 ring-1 ring-stone-200 hover:bg-stone-50'
               }`}
               onClick={() => setFilter(item.id)}
@@ -63,6 +63,7 @@ export default function Auditoria() {
         markReviewed={markReviewed}
         reviewed={selected ? reviewedAlerts.includes(selected.id) : false}
         targetMargin={targetMargin}
+        recipes={recipes}
       />
     </div>
   );

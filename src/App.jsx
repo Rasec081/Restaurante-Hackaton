@@ -5,6 +5,7 @@ import Dashboard from './pages/Dashboard.jsx';
 import Auditoria from './pages/Auditoria.jsx';
 import Recetas from './pages/Recetas.jsx';
 import Configuracion from './pages/Configuracion.jsx';
+import { recetas as initialRecipes } from './data/recetas.js';
 
 const AuditConfigContext = createContext(null);
 
@@ -23,6 +24,7 @@ export default function App() {
   const [alertThreshold, setAlertThreshold] = useState(10);
   const [targetMargin, setTargetMargin] = useState(65);
   const [reviewedAlerts, setReviewedAlerts] = useState([]);
+  const [recipes, setRecipes] = useState(initialRecipes);
 
   const value = useMemo(
     () => ({
@@ -30,12 +32,17 @@ export default function App() {
       setAlertThreshold,
       targetMargin,
       setTargetMargin,
+      recipes,
+      createRecipe: (recipe) => setRecipes((current) => [recipe, ...current]),
+      updateRecipe: (recipe) =>
+        setRecipes((current) => current.map((item) => (item.id === recipe.id ? recipe : item))),
+      deleteRecipe: (id) => setRecipes((current) => current.filter((item) => item.id !== id)),
       reviewedAlerts,
       markReviewed: (id) =>
         setReviewedAlerts((current) => (current.includes(id) ? current : [...current, id])),
       getStatus: (variation) => classifyVariation(variation, alertThreshold),
     }),
-    [alertThreshold, targetMargin, reviewedAlerts],
+    [alertThreshold, targetMargin, reviewedAlerts, recipes],
   );
 
   return (

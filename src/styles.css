@@ -27,6 +27,12 @@ input {
   }
 
   .focus-ring {
-    @apply focus:outline-none focus-visible:ring-2 focus-visible:ring-terracota focus-visible:ring-offset-2;
+    @apply focus:outline-none;
+  }
+
+  .focus-ring:focus-visible {
+    box-shadow:
+      0 0 0 2px #ffffff,
+      0 0 0 4px #1E293B;
   }
 }

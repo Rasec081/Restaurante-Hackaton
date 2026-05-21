@@ -1,6 +1,5 @@
 import { ingredientes } from './ingredientes.js';
 import { proveedores } from './proveedores.js';
-import { recetas } from './recetas.js';
 
 export const currency = new Intl.NumberFormat('es-CR', {
   style: 'currency',
@@ -23,11 +22,12 @@ export function calculateRecipeCost(recipe, priceKey = 'precio_actual') {
 }
 
 export function calculateMargin(price, cost) {
+  if (!price) return 0;
   return ((price - cost) / price) * 100;
 }
 
-export function getEnrichedRecipes(getStatus = () => 'Normal') {
-  return recetas.map((recipe) => {
+export function getEnrichedRecipes(sourceRecipes, getStatus = () => 'Normal') {
+  return sourceRecipes.map((recipe) => {
     const costo_calculado = calculateRecipeCost(recipe);
     const margen_pct = calculateMargin(recipe.precio_venta, costo_calculado);
     const hasAlert = recipe.ingredientes.some((item) => {
@@ -44,8 +44,8 @@ export function getEnrichedRecipes(getStatus = () => 'Normal') {
   });
 }
 
-export function getAffectedRecipes(ingredientId, targetMargin = 65) {
-  return recetas
+export function getAffectedRecipes(sourceRecipes, ingredientId, targetMargin = 65) {
+  return sourceRecipes
     .filter((recipe) => recipe.ingredientes.some((item) => item.ingrediente_id === ingredientId))
     .map((recipe) => {
       const costo_anterior = calculateRecipeCost(recipe, 'precio_anterior');

@@ -35,7 +35,7 @@ export default function Configuracion() {
 
       <section className="panel rounded-lg p-5">
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-stone-100 text-terracota">
+          <div className="grid h-10 w-10 place-items-center rounded-lg bg-stone-100 text-slate-800">
             <Building2 size={20} />
           </div>
           <div>
@@ -47,7 +47,7 @@ export default function Configuracion() {
           {proveedores.map((supplier) => (
             <article key={supplier.id} className="rounded-lg border border-stone-200 p-4">
               <h3 className="font-bold text-cacao">{supplier.nombre}</h3>
-              <a className="mt-1 block break-all text-sm font-semibold text-terracota" href={supplier.url}>
+              <a className="mt-1 block break-all text-sm font-semibold text-slate-800" href={supplier.url}>
                 {supplier.url}
               </a>
               <p className="mt-3 text-sm text-stone-600">
@@ -87,18 +87,18 @@ function Control({ icon: Icon, title, value, suffix, min, max, onChange }) {
     <section className="panel rounded-lg p-5">
       <div className="flex items-center justify-between gap-3">
         <div className="flex items-center gap-3">
-          <div className="grid h-10 w-10 place-items-center rounded-lg bg-stone-100 text-terracota">
+          <div className="grid h-10 w-10 place-items-center rounded-lg bg-stone-100 text-slate-800">
             <Icon size={20} />
           </div>
           <h2 className="font-bold text-cacao">{title}</h2>
         </div>
-        <span className="text-2xl font-bold text-terracota">
+        <span className="text-2xl font-bold text-slate-800">
           {value}
           {suffix}
         </span>
       </div>
       <input
-        className="mt-5 w-full accent-terracota"
+        className="mt-5 w-full accent-slate-800"
         type="range"
         min={min}
         max={max}

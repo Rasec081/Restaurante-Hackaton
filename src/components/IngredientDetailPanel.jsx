@@ -9,11 +9,12 @@ export default function IngredientDetailPanel({
   markReviewed,
   reviewed,
   targetMargin,
+  recipes,
 }) {
   if (!ingredient) return null;
 
   const status = getStatus(ingredient.variacion_pct);
-  const affectedRecipes = getAffectedRecipes(ingredient.id, targetMargin);
+  const affectedRecipes = getAffectedRecipes(recipes, ingredient.id, targetMargin);
 
   return (
     <div className="fixed inset-0 z-40">
@@ -85,7 +86,7 @@ export default function IngredientDetailPanel({
 
         <div className="border-t border-stone-200 p-5">
           <button
-            className="focus-ring w-full rounded-lg bg-terracota px-4 py-3 font-bold text-white transition hover:bg-[#64230e] disabled:cursor-not-allowed disabled:bg-stone-300"
+            className="focus-ring w-full rounded-lg bg-slate-800 px-4 py-3 font-bold text-white transition hover:bg-[#0f172a] disabled:cursor-not-allowed disabled:bg-stone-300"
             onClick={() => markReviewed(ingredient.id)}
             disabled={reviewed}
           >
